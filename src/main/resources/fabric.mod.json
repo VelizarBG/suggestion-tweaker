@@ -1,0 +1,27 @@
+{
+  "schemaVersion": 1,
+  "id": "suggestion_tweaker",
+  "version": "${version}",
+
+  "name": "Suggestion Tweaker",
+  "description": "",
+  "authors": [
+    "VelizarBG"
+  ],
+  "contact": {
+    "sources": "https://github.com/VelizarBG/suggestion-tweaker"
+  },
+
+  "license": "MIT",
+
+  "environment": "*",
+  "mixins": [
+    "suggestion_tweaker.mixins.json"
+  ],
+
+  "depends": {
+    "fabricloader": ">=0.12.12",
+    "minecraft": "1.18.x",
+    "java": ">=17"
+  }
+}
