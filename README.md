@@ -14,6 +14,10 @@ Top - vanilla, bottom - Suggestion Tweaker.
 <br/>
 <img src="https://user-images.githubusercontent.com/31567122/163832068-dca72913-b8bb-4cda-b827-ae49fd43beba.png" width="512">
 
+## Idea
+
+Credit goes to SnaveSutit for the cool idea!
+
 ## Compiling
 * Clone the repository
 * Open a command prompt/terminal to the repository directory
