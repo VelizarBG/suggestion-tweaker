@@ -3,8 +3,11 @@
   "minVersion": "0.8",
   "package": "velizarbg.suggestion_tweaker.mixins",
   "compatibilityLevel": "JAVA_17",
-  "client": [
+  "mixins": [
     "CommandSourceMixin"
+  ],
+  "client": [
+    "ClientCommandSourceMixin"
   ],
   "injectors": {
     "defaultRequire": 1
