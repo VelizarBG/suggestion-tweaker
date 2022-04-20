@@ -39,6 +39,7 @@ public class ClientCommandSourceMixin {
 		List<Suggestion> suggestionList = new ArrayList<>();
 		for (Suggestion suggestion : suggestions.getList()) {
 			if (!CommandSource.shouldSuggest(currentInput, suggestion.getText())) continue;
+			suggestion = new Suggestion(new StringRange(suggestion.getRange().getStart(), suggestion.getRange().getEnd() + currentInput.length()), suggestion.getText(), suggestion.getTooltip());
 			suggestionList.add(suggestion);
 			start = Math.min(suggestion.getRange().getStart(), start);
 			end = Math.max(suggestion.getRange().getEnd(), end);
