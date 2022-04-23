@@ -7,7 +7,8 @@
     "CommandSourceMixin"
   ],
   "client": [
-    "ClientCommandSourceMixin"
+    "ClientCommandSourceMixin",
+    "CommandSuggestorMixin"
   ],
   "injectors": {
     "defaultRequire": 1

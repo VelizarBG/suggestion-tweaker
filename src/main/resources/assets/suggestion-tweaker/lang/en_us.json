@@ -1,3 +1,4 @@
 {
-    "text.autoconfig.suggestion-tweaker.title": "Suggestion Tweaker"
+    "text.autoconfig.suggestion-tweaker.title": "Suggestion Tweaker",
+    "text.autoconfig.suggestion-tweaker.option.isCaseSensitive": "Enable case sensitivity"
 }

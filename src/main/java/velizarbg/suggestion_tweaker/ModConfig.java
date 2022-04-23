@@ -12,4 +12,7 @@ public class ModConfig implements ConfigData {
 		AutoConfig.register(ModConfig.class, JanksonConfigSerializer::new);
 		return AutoConfig.getConfigHolder(ModConfig.class).getConfig();
 	}
+
+	@Comment("Controls how some suggestions are filtered and sorted based on case")
+	public boolean isCaseSensitive = false;
 }

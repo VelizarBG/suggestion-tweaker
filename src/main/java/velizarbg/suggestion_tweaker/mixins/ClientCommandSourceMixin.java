@@ -11,8 +11,11 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.ModifyVariable;
 import org.spongepowered.asm.mixin.injection.Redirect;
 
+import static velizarbg.suggestion_tweaker.SuggestionTweakerClient.config;
+
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 /**
  * A workaround to the sorting of server-specific suggestions being outsourced to the server.
@@ -38,11 +41,21 @@ public class ClientCommandSourceMixin {
 		int end = Integer.MIN_VALUE;
 		List<Suggestion> suggestionList = new ArrayList<>();
 		for (Suggestion suggestion : suggestions.getList()) {
-			if (!CommandSource.shouldSuggest(currentInput, suggestion.getText())) continue;
-			suggestion = new Suggestion(new StringRange(suggestion.getRange().getStart(), suggestion.getRange().getEnd() + currentInput.length()), suggestion.getText(), suggestion.getTooltip());
-			suggestionList.add(suggestion);
-			start = Math.min(suggestion.getRange().getStart(), start);
-			end = Math.max(suggestion.getRange().getEnd(), end);
+			if (!config.isCaseSensitive
+				? CommandSource.shouldSuggest(currentInput.toLowerCase(Locale.ROOT), suggestion.getText().toLowerCase(Locale.ROOT))
+				: CommandSource.shouldSuggest(currentInput, suggestion.getText())
+			) {
+				suggestionList.add(new Suggestion(
+					new StringRange(
+						suggestion.getRange().getStart(),
+						suggestion.getRange().getEnd() + currentInput.length()
+					),
+					suggestion.getText(),
+					suggestion.getTooltip()
+				));
+				start = Math.min(suggestion.getRange().getStart(), start);
+				end = Math.max(suggestion.getRange().getEnd(), end);
+			}
 		}
 		return new Suggestions(new StringRange(start, end), suggestionList);
 	}
