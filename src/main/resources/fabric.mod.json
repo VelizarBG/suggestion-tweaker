@@ -13,6 +13,7 @@
   },
 
   "license": "MIT",
+  "icon": "assets/suggestion-tweaker/icon.png",
 
   "environment": "*",
   "mixins": [
