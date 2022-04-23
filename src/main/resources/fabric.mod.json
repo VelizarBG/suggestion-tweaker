@@ -19,6 +19,9 @@
   "entrypoints": {
     "client": [
       "velizarbg.suggestion_tweaker.SuggestionTweakerClient"
+    ],
+    "modmenu": [
+      "velizarbg.suggestion_tweaker.gui.ModMenuIntegration"
     ]
   },
 
