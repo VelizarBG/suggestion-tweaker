@@ -16,6 +16,12 @@
   "icon": "assets/suggestion-tweaker/icon.png",
 
   "environment": "*",
+  "entrypoints": {
+    "client": [
+      "velizarbg.suggestion_tweaker.SuggestionTweakerClient"
+    ]
+  },
+
   "mixins": [
     "suggestion_tweaker.mixins.json"
   ],
