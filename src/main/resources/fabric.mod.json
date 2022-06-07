@@ -4,7 +4,7 @@
   "version": "${version}",
 
   "name": "Suggestion Tweaker",
-  "description": "",
+  "description": "Improves the way suggestions are filtered when writing a command",
   "authors": [
     "VelizarBG"
   ],
@@ -31,7 +31,7 @@
 
   "depends": {
     "fabricloader": ">=0.12.12",
-    "minecraft": "1.18.x",
+    "minecraft": ">=1.19",
     "java": ">=17"
   }
 }

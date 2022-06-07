@@ -1,6 +1,6 @@
 # Suggestion Tweaker
 
-This is a client and server mod which changes the way suggestions are picked in the suggestions tab when writing a command in chat.
+This is a client and server mod which improves the way suggestions are filtered when writing a command.
 
 ## Improved filtering
 
