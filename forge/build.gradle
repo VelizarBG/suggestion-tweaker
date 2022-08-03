@@ -1,0 +1,116 @@
+plugins {
+	id "me.shedaniel.unified-publishing"
+}
+
+loom {
+	forge {
+		mixinConfigs = [
+				"suggestion_tweaker-common.mixins.json"
+		]
+	}
+}
+
+architectury {
+	platformSetupLoomIde()
+	forge()
+}
+
+configurations {
+	common
+	shadowCommon
+	compileClasspath.extendsFrom common
+	runtimeClasspath.extendsFrom common
+	developmentForge.extendsFrom common
+}
+
+dependencies {
+	forge "net.minecraftforge:forge:${rootProject.architectury.minecraft}-${rootProject.forge_version}"
+
+	modApi "me.shedaniel.cloth:cloth-config-forge:${rootProject.cloth_version}"
+
+	common(project(path: ":common", configuration: "namedElements")) { transitive false }
+	shadowCommon(project(path: ":common", configuration: "transformProductionForge")) { transitive false }
+}
+
+processResources {
+	inputs.property "version", project.version
+
+	filesMatching("META-INF/mods.toml") {
+		expand "version": project.version
+	}
+}
+
+shadowJar {
+	configurations = [project.configurations.shadowCommon]
+	classifier "dev-shadow"
+}
+
+remapJar {
+	input.set(shadowJar.archiveFile)
+	dependsOn(shadowJar)
+	classifier "forge"
+
+	from(rootProject.file("LICENSE")) {
+		rename { "${it}_${rootProject.archivesBaseName}"}
+	}
+}
+
+jar {
+	classifier "dev"
+}
+
+sourcesJar {
+	def commonSources = project(":common").sourcesJar
+	dependsOn commonSources
+	from commonSources.archiveFile.map { zipTree(it) }
+}
+
+components.java {
+	withVariantsFromConfiguration(project.configurations.shadowRuntimeElements) {
+		skip()
+	}
+}
+
+// configure the maven publication
+publishing {
+	publications {
+		mavenForge(MavenPublication) {
+			artifactId = rootProject.archives_base_name + "-forge"
+			from components.java
+		}
+	}
+
+	// See https://docs.gradle.org/current/userguide/publishing_maven.html for information on how to set up publishing.
+	repositories {
+		// Add repositories to publish to here.
+	}
+}
+
+unifiedPublishing {
+	project {
+		displayName = "[Forge $project.supported_version] v$project.version"
+		releaseType = "release"
+		gameVersions = ["1.19"]
+		gameLoaders = ["forge"]
+
+		mainPublication remapJar
+
+		if (project.hasProperty("curse_api_key") || System.getenv("curse_api_key") != null) {
+			curseforge {
+				token = project.hasProperty("curse_api_key") ? project.property("curse_api_key") : System.getenv("curse_api_key")
+				id = project.curseforge_id
+				gameVersions.addAll "Java 17"
+			}
+		}
+
+		if (project.hasProperty("modrinth_key") || System.getenv("modrinth_key") != null) {
+			modrinth {
+				token = project.hasProperty("modrinth_key") ? project.property("modrinth_key") : System.getenv("modrinth_key")
+				id = project.modrinth_id
+				version = "$project.version+$project.name"
+			}
+		}
+	}
+}
+
+rootProject.tasks.getByName("modPublish").dependsOn tasks.getByName("publishUnified")

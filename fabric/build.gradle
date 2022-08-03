@@ -1,0 +1,115 @@
+plugins {
+	id "me.shedaniel.unified-publishing"
+}
+
+architectury {
+	platformSetupLoomIde()
+	fabric()
+}
+
+configurations {
+	common
+	shadowCommon
+	compileClasspath.extendsFrom common
+	runtimeClasspath.extendsFrom common
+	developmentFabric.extendsFrom common
+}
+
+repositories {
+	maven { url "https://maven.terraformersmc.com/" }
+}
+
+dependencies {
+	modImplementation "net.fabricmc:fabric-loader:${rootProject.fabric_loader_version}"
+
+	modImplementation "com.terraformersmc:modmenu:${rootProject.modmenu_version}"
+	modApi("me.shedaniel.cloth:cloth-config-fabric:${rootProject.cloth_version}") {
+		exclude(group: "net.fabricmc.fabric-api")
+	}
+
+	common(project(path: ":common", configuration: "namedElements")) { transitive false }
+	shadowCommon(project(path: ":common", configuration: "transformProductionFabric")) { transitive false }
+}
+
+processResources {
+	inputs.property "version", project.version
+
+	filesMatching("fabric.mod.json") {
+		expand "version": project.version
+	}
+}
+
+shadowJar {
+	configurations = [project.configurations.shadowCommon]
+	classifier "dev-shadow"
+}
+
+remapJar {
+	input.set(shadowJar.archiveFile)
+	dependsOn(shadowJar)
+	classifier "fabric"
+
+	from(rootProject.file("LICENSE")) {
+		rename { "${it}_${rootProject.archivesBaseName}"}
+	}
+}
+
+jar {
+	classifier "dev"
+}
+
+sourcesJar {
+	def commonSources = project(":common").sourcesJar
+	dependsOn commonSources
+	from commonSources.archiveFile.map { zipTree(it) }
+}
+
+components.java {
+	withVariantsFromConfiguration(project.configurations.shadowRuntimeElements) {
+		skip()
+	}
+}
+
+// configure the maven publication
+publishing {
+	publications {
+		mavenFabric(MavenPublication) {
+			artifactId = rootProject.archives_base_name + "-fabric"
+			from components.java
+		}
+	}
+
+	// See https://docs.gradle.org/current/userguide/publishing_maven.html for information on how to set up publishing.
+	repositories {
+		// Add repositories to publish to here.
+	}
+}
+
+unifiedPublishing {
+	project {
+		displayName = "[Fabric $project.supported_version] v$project.version"
+		releaseType = "release"
+		gameVersions = ["1.19"]
+		gameLoaders = ["fabric"]
+
+		mainPublication remapJar
+
+		if (project.hasProperty("curse_api_key") || System.getenv("curse_api_key") != null) {
+			curseforge {
+				token = project.hasProperty("curse_api_key") ? project.property("curse_api_key") : System.getenv("curse_api_key")
+				id = project.curseforge_id
+				gameVersions.addAll "Java 17"
+			}
+		}
+
+		if (project.hasProperty("modrinth_key") || System.getenv("modrinth_key") != null) {
+			modrinth {
+				token = project.hasProperty("modrinth_key") ? project.property("modrinth_key") : System.getenv("modrinth_key")
+				id = project.modrinth_id
+				version = "$project.version+$project.name"
+			}
+		}
+	}
+}
+
+rootProject.tasks.getByName("modPublish").dependsOn tasks.getByName("publishUnified")

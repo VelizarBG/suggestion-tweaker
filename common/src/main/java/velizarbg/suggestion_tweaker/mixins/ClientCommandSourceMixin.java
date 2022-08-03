@@ -11,7 +11,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.ModifyVariable;
 import org.spongepowered.asm.mixin.injection.Redirect;
 
-import static velizarbg.suggestion_tweaker.SuggestionTweakerClient.config;
+import static velizarbg.suggestion_tweaker.Constants.config;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -41,9 +41,9 @@ public class ClientCommandSourceMixin {
 		int end = Integer.MIN_VALUE;
 		List<Suggestion> suggestionList = new ArrayList<>();
 		for (Suggestion suggestion : suggestions.getList()) {
-			if (!config.isCaseSensitive
-				? CommandSource.shouldSuggest(currentInput.toLowerCase(Locale.ROOT), suggestion.getText().toLowerCase(Locale.ROOT))
-				: CommandSource.shouldSuggest(currentInput, suggestion.getText())
+			if (config.isCaseSensitive
+				? CommandSource.shouldSuggest(currentInput, suggestion.getText())
+				: CommandSource.shouldSuggest(currentInput.toLowerCase(Locale.ROOT), suggestion.getText().toLowerCase(Locale.ROOT))
 			) {
 				suggestionList.add(new Suggestion(
 					new StringRange(

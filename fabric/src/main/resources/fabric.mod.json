@@ -13,12 +13,12 @@
   },
 
   "license": "MIT",
-  "icon": "assets/suggestion-tweaker/icon.png",
+  "icon": "icon.png",
 
   "environment": "*",
   "entrypoints": {
-    "client": [
-      "velizarbg.suggestion_tweaker.SuggestionTweakerClient"
+    "main": [
+      "velizarbg.suggestion_tweaker.SuggestionTweaker"
     ],
     "modmenu": [
       "velizarbg.suggestion_tweaker.gui.ModMenuIntegration"
@@ -26,7 +26,7 @@
   },
 
   "mixins": [
-    "suggestion_tweaker.mixins.json"
+    "suggestion_tweaker-common.mixins.json"
   ],
 
   "depends": {

@@ -37,3 +37,10 @@ jobs:
         with:
           name: Artifacts
           path: build/libs/
+      - name: publish artifacts
+        if: |
+          runner.os == 'Linux' && matrix.java == '17' && contains(github.event.head_commit.message, 'Bump version')
+        env:
+          curse_api_key: ${{ secrets.CF_API_KEY }}
+          modrinth_key: ${{ secrets.MODRINTH_KEY }}
+        run: ./gradlew publish modPublish --stacktrace
