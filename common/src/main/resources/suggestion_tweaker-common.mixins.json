@@ -8,7 +8,7 @@
   ],
   "client": [
     "ClientCommandSourceMixin",
-    "CommandSuggestorMixin"
+    "ChatInputSuggestorMixin"
   ],
   "injectors": {
     "defaultRequire": 1

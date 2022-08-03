@@ -1,5 +1,5 @@
 modLoader="javafml"
-loaderVersion="[41,)"
+loaderVersion="[42,)"
 license="MIT License"
 
 [[mods]]
@@ -17,13 +17,13 @@ issueTrackerURL = "https://github.com/VelizarBG/suggestion-tweaker/issues"
 [[dependencies.suggestion_tweaker]]
 modId = "forge"
 mandatory = true
-versionRange = "[41,)"
+versionRange = "[42,)"
 ordering = "NONE"
 side = "BOTH" # BOTH, CLIENT or SERVER
 
 [[dependencies.suggestion_tweaker]]
 modId = "minecraft"
 mandatory = true
-versionRange = "[1.19,)"
+versionRange = "[1.19.1,)"
 ordering = "NONE"
 side = "BOTH"
