@@ -90,7 +90,7 @@ unifiedPublishing {
 	project {
 		displayName = "[Forge $project.supported_version] v$project.version"
 		releaseType = "release"
-		gameVersions = ["1.19"]
+		gameVersions = ["1.18", "1.18.1", "1.18.2"]
 		gameLoaders = ["forge"]
 
 		mainPublication remapJar
