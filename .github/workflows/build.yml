@@ -33,10 +33,13 @@ jobs:
         run: ./gradlew build
       - name: capture build artifacts
         if: ${{ runner.os == 'Linux' && matrix.java == '17' }} # Only upload artifacts built from latest java on one OS
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: Artifacts
-          path: build/libs/
+          path: |
+            common/build/libs/
+            fabric/build/libs/
+            forge/build/libs/
       - name: publish artifacts
         if: |
           runner.os == 'Linux' && matrix.java == '17' && contains(github.event.head_commit.message, 'Bump version')
