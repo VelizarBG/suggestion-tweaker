@@ -11,14 +11,14 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.ModifyVariable;
 import org.spongepowered.asm.mixin.injection.Redirect;
 
-import static velizarbg.suggestion_tweaker.Constants.config;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
+import static velizarbg.suggestion_tweaker.Constants.config;
+
 /**
- * A workaround to the sorting of server-specific suggestions being outsourced to the server.
+ * A workaround to the filtering of server-specific suggestions being outsourced to the server.
  */
 @Mixin(ClientCommandSource.class)
 public class ClientCommandSourceMixin {

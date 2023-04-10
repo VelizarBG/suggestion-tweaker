@@ -18,10 +18,10 @@
   "environment": "*",
   "entrypoints": {
     "main": [
-      "velizarbg.suggestion_tweaker.SuggestionTweaker"
+      "velizarbg.suggestion_tweaker.fabric.SuggestionTweaker"
     ],
     "modmenu": [
-      "velizarbg.suggestion_tweaker.gui.ModMenuIntegration"
+      "velizarbg.suggestion_tweaker.fabric.gui.ModMenuIntegration"
     ]
   },
 
