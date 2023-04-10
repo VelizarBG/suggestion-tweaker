@@ -87,26 +87,29 @@ publishing {
 
 unifiedPublishing {
 	project {
-		displayName = "[Fabric $project.supported_version] v$project.version"
-		releaseType = "release"
-		gameVersions = ["1.19.1"]
-		gameLoaders = ["fabric"]
-		changelog = "Update to 1.19.1"
+		displayName.set "[Fabric $project.supported_version] v$project.version"
+		releaseType.set "release"
+		gameVersions.set(["1.19.1", "1.19.2", "1.19.3", "1.19.4"])
+		gameLoaders.set(["fabric"])
+
+		System.getenv("changelog")?.with { String changelogg ->
+			changelog.set changelogg
+		}
 
 		mainPublication remapJar
 
-		if (project.hasProperty("curse_api_key") || System.getenv("curse_api_key") != null) {
+		System.getenv("curse_api_key")?.with { String key ->
 			curseforge {
-				token = project.hasProperty("curse_api_key") ? project.property("curse_api_key") : System.getenv("curse_api_key")
-				id = project.curseforge_id
+				token.set key
+				id.set project.curseforge_id
 				gameVersions.addAll "Java 17"
 			}
 		}
 
-		if (project.hasProperty("modrinth_key") || System.getenv("modrinth_key") != null) {
+		System.getenv("modrinth_key")?.with { String key ->
 			modrinth {
-				token = project.hasProperty("modrinth_key") ? project.property("modrinth_key") : System.getenv("modrinth_key")
-				id = project.modrinth_id
+				token.set key
+				id.set project.modrinth_id
 				version = "$project.version+$project.name"
 			}
 		}
