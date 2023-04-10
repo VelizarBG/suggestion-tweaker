@@ -42,10 +42,3 @@ jobs:
             common/build/libs/
             fabric/build/libs/
             forge/build/libs/
-      - name: publish artifacts
-        if: |
-          runner.os == 'Linux' && matrix.java == '17' && contains(github.event.head_commit.message, 'Bump version') && github.event_name != 'pull_request'
-        env:
-          curse_api_key: ${{ secrets.CF_API_KEY }}
-          modrinth_key: ${{ secrets.MODRINTH_KEY }}
-        run: ./gradlew publish modPublish --stacktrace
