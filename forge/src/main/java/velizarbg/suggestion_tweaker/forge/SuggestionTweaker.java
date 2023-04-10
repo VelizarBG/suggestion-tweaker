@@ -1,11 +1,11 @@
-package velizarbg.suggestion_tweaker;
+package velizarbg.suggestion_tweaker.forge;
 
 import me.shedaniel.autoconfig.AutoConfig;
-import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.ConfigScreenHandler;
-import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
+import velizarbg.suggestion_tweaker.Constants;
+import velizarbg.suggestion_tweaker.ModConfig;
 
 @Mod(SuggestionTweaker.MODID)
 public class SuggestionTweaker {
@@ -13,10 +13,8 @@ public class SuggestionTweaker {
 
 	public SuggestionTweaker() {
 		Constants.config = ModConfig.init();
-		DistExecutor.safeRunWhenOn(Dist.CLIENT, () -> SuggestionTweaker::registerConfigScreen);
-	}
 
-	private static void registerConfigScreen() {
+		// register config screen
 		ModLoadingContext.get().registerExtensionPoint(ConfigScreenHandler.ConfigScreenFactory.class, () -> new ConfigScreenHandler.ConfigScreenFactory((client, parent) ->
 			AutoConfig.getConfigScreen(ModConfig.class, parent).get()
 		));

@@ -21,9 +21,8 @@ public interface CommandSourceMixin {
 		for (T candidate : candidates) {
 			Identifier identifier = getIdentifier.apply(candidate);
 
-			if (CommandSource.shouldSuggest(remaining, identifier.toString())) {
+			if (CommandSource.shouldSuggest(remaining, identifier.toString()))
 				action.accept(candidate);
-			}
 		}
 	}
 

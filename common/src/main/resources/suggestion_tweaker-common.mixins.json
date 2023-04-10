@@ -1,16 +1,16 @@
 {
-  "required": true,
-  "minVersion": "0.8",
-  "package": "velizarbg.suggestion_tweaker.mixins",
-  "compatibilityLevel": "JAVA_17",
-  "mixins": [
-    "CommandSourceMixin"
-  ],
-  "client": [
-    "ClientCommandSourceMixin",
-    "ChatInputSuggestorMixin"
-  ],
-  "injectors": {
-    "defaultRequire": 1
+    "required": true,
+    "minVersion": "0.8",
+    "package": "velizarbg.suggestion_tweaker.mixins",
+    "compatibilityLevel": "JAVA_17",
+    "mixins": [
+        "CommandSourceMixin"
+    ],
+    "client": [
+        "ChatInputSuggestorMixin",
+        "ClientCommandSourceMixin"
+    ],
+    "injectors": {
+        "defaultRequire": 1
   }
 }
