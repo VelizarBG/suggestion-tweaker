@@ -26,7 +26,8 @@
   },
 
   "mixins": [
-    "suggestion_tweaker-common.mixins.json"
+    "suggestion_tweaker-common.mixins.json",
+    "suggestion_tweaker-fabric.mixins.json"
   ],
 
   "depends": {
