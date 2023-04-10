@@ -33,6 +33,18 @@ public interface CommandSourceMixin {
 	 */
 	@Overwrite
 	static boolean shouldSuggest(String remaining, String candidate) {
+		// if present, split namespace and path to allow searching inside a specific namespace
+		String[] remainingId = remaining.split(":", 2);
+		if (remainingId.length == 2)
+			if (candidate.startsWith(remainingId[0]))
+				remaining = remainingId[1];
+			else
+				return false;
+
+		String[] candidateId = candidate.split(":", 2);
+		if (candidateId.length == 2)
+			candidate = candidateId[1];
+
 		return config.filteringMode.test(remaining, candidate);
 	}
 }
