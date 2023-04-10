@@ -5,7 +5,6 @@ import net.minecraft.util.Identifier;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Overwrite;
 
-import java.util.Locale;
 import java.util.function.Consumer;
 import java.util.function.Function;
 
@@ -34,8 +33,6 @@ public interface CommandSourceMixin {
 	 */
 	@Overwrite
 	static boolean shouldSuggest(String remaining, String candidate) {
-		return config.isCaseSensitive
-			? candidate.contains(remaining)
-			: candidate.toLowerCase(Locale.ROOT).contains(remaining.toLowerCase(Locale.ROOT));
+		return config.filteringMode.test(remaining, candidate);
 	}
 }
