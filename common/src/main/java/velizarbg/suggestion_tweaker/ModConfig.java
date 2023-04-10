@@ -7,6 +7,7 @@ import me.shedaniel.autoconfig.serializer.JanksonConfigSerializer;
 import me.shedaniel.cloth.clothconfig.shadowed.blue.endless.jankson.Comment;
 
 @Config(name = "suggestion-tweaker")
+@Config.Gui.Background("minecraft:textures/block/ice.png")
 public class ModConfig implements ConfigData {
 	public static ModConfig init() {
 		AutoConfig.register(ModConfig.class, JanksonConfigSerializer::new);
