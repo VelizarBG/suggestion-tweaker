@@ -10,7 +10,7 @@ architectury {
 configurations {
 	common
 	shadowCommon
-	compileClasspath.extendsFrom common
+	compileOnly.extendsFrom common
 	runtimeClasspath.extendsFrom common
 	developmentFabric.extendsFrom common
 }
@@ -41,13 +41,13 @@ processResources {
 
 shadowJar {
 	configurations = [project.configurations.shadowCommon]
-	classifier "dev-shadow"
+	archiveClassifier.set "dev-shadow"
 }
 
 remapJar {
 	input.set(shadowJar.archiveFile)
 	dependsOn(shadowJar)
-	classifier "fabric"
+	archiveClassifier.set "fabric"
 
 	from(rootProject.file("LICENSE")) {
 		rename { "${it}_${rootProject.archivesBaseName}"}
@@ -55,7 +55,7 @@ remapJar {
 }
 
 jar {
-	classifier "dev"
+	archiveClassifier.set "dev"
 }
 
 sourcesJar {
