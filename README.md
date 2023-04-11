@@ -1,10 +1,18 @@
 # Suggestion Tweaker
 
-This is a client and server mod which improves the way suggestions are filtered when writing a command.
+This is a client and server mod which improves the way suggestions are filtered and sorted when writing a command.
+
+## Dependencies
+
+This mod requires [Cloth Config API](https://www.curseforge.com/minecraft/mc-mods/cloth-config). [Mod Menu](https://www.curseforge.com/minecraft/mc-mods/modmenu) is optional in case you want more configuration like enabling case sensitivity and changing the filtering mode.
 
 ## Improved filtering
 
-Vanilla usually starts comparing the input with the start of the suggestion candidate and discards if it doesn't match. In some cases it checks for a `.` or `_` and then the input. This can often be annoying when trying to search for something because it is too strict. This mod changes that, so now any entry containing the input anywhere inside it is included.
+Vanilla usually starts comparing the input with the start of the suggestion candidate and discards if it doesn't match. In some cases it checks for a `.` or `_` and then the input. This can often be annoying when trying to search for something because it is too strict. This mod changes that, so now you have a choice between different filtering modes: `STRICT`(the vanilla way), `SLIGHTLY LOOSE`(shows all suggestions containing the input anywhere inside), `LOOSE`(like the previous but with multiple words, separated by an underscore), and `VERY LOOSE`(shows all suggestions containing every letter in the input).
+
+## Improved sorting
+
+Suggestions are sorted from the strictest to most loose match. Vanilla only sorts alphabetically, lacking multiple filtering modes.
 
 ## Server and client
 
