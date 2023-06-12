@@ -23,6 +23,7 @@ import static velizarbg.suggestion_tweaker.Constants.config;
 @Mixin(ClientCommandSource.class)
 public class ClientCommandSourceMixin {
 	private String currentInput;
+	private static final char[] SPECIAL_CUTOFF_CHARS = new char[]{'[', '='};
 
 	/**
 	 * In order to fetch all possible suggestions the last argument needs to be empty.
@@ -30,9 +31,15 @@ public class ClientCommandSourceMixin {
 	@Redirect(method = "getCompletions", at = @At(target = "Lcom/mojang/brigadier/context/CommandContext;getInput()Ljava/lang/String;", value = "INVOKE"))
 	private String processInput(CommandContext<?> context) {
 		String input = context.getInput();
-		int lastSpaceIndex = input.lastIndexOf(' ');
-		currentInput = input.substring(lastSpaceIndex + 1);
-		return input.substring(0, lastSpaceIndex + 1);
+		int cutoffIndex = input.lastIndexOf(' ');
+		// special cutoff chars are added to fix #6
+		for (char c : SPECIAL_CUTOFF_CHARS) {
+			int index = input.lastIndexOf(c);
+			if (index > cutoffIndex)
+				cutoffIndex = index;
+		}
+		currentInput = input.substring(cutoffIndex + 1);
+		return input.substring(0, cutoffIndex + 1);
 	}
 
 	@ModifyVariable(method = "onCommandSuggestions", at = @At(target = "Ljava/util/concurrent/CompletableFuture;complete(Ljava/lang/Object;)Z", value = "INVOKE", shift = At.Shift.BEFORE), index = 2, argsOnly = true)
