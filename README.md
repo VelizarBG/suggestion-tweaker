@@ -1,6 +1,6 @@
 # Suggestion Tweaker
 
-This is a client and server mod which improves the way suggestions are filtered and sorted when writing a command.
+This is a client/server mod that improves the way suggestions are filtered and sorted when writing a command.
 
 ## Dependencies
 
@@ -8,7 +8,14 @@ This mod requires [Cloth Config API](https://www.curseforge.com/minecraft/mc-mod
 
 ## Improved filtering
 
-Vanilla usually starts comparing the input with the start of the suggestion candidate and discards if it doesn't match. In some cases it checks for a `.` or `_` and then the input. This can often be annoying when trying to search for something because it is too strict. This mod changes that, so now you have a choice between different filtering modes: `STRICT`(the vanilla way), `SLIGHTLY LOOSE`(shows all suggestions containing the input anywhere inside), `LOOSE`(like the previous but with multiple words, separated by an underscore), and `VERY LOOSE`(shows all suggestions containing every letter in the input).
+- Vanilla usually starts comparing the input with the start of the suggestion candidate and discards if it doesn't match. In some cases it checks for a `.` or `_` and then the input. This can often be annoying when trying to search for something because it is too strict. This mod changes that, so now you have a choice between different filtering modes:
+  - `STRICT` - the vanilla way
+  - `SLIGHTLY LOOSE` - shows all suggestions containing the input anywhere inside
+  - `LOOSE` - like the previous but with multiple words, separated by an underscore
+  - `VERY LOOSE` - shows all suggestions containing every letter in the input
+
+
+- Suggestions with a specific prefix can be hidden. That applies to both directory and file names. For example, if the specific prefix is an underscore, an identifier named `datapack:_function` will be hidden and so will be `datapack:_directory/function` but `datapack:directory/function` won't be. It works for all identifiers, not just functions. This feature is disabled by default.
 
 ## Improved sorting
 
@@ -16,7 +23,13 @@ Suggestions are sorted from the strictest to most loose match. Vanilla only sort
 
 ## Server and client
 
-Suggestions can be separated into two groups - ones that are filtered on the server(based on the client's input) and ones that aren't. The former are things such as functions, loot tables, item modifiers, predicates, and a few others. The latter are things such as scoreboard criteria, colors, blocks, and others. Since the former's filtering is controlled by the server, a workaround is established to let the client use the new way of filtering suggestions independent of the server. This mod is also a server mod and provides better suggestions even for clients without the mod(but only the former group of suggestions).
+Suggestions can be separated into two groups:
+1. ones that are filtered on the server(based on the client's input);
+    - e.g. functions, loot tables, item modifiers, predicates, and a few others
+2. ones that are filtered on the client.
+    - e.g. scoreboard criteria, colors, blocks, and others
+
+Since the first group's filtering is controlled by the server, a special workaround is established to let the client use the new way of filtering suggestions, independent of the server. Therefore, this mod is also a server mod and provides better suggestions even for clients without the mod.
 
 ## Examples
 
@@ -36,4 +49,4 @@ Credit goes to SnaveSutit for the cool idea!
 * Clone the repository
 * Open a command prompt/terminal to the repository directory
 * Run 'gradlew build'
-* The built jar file will be in build/libs/
+* The built jar files will be in fabric/build/libs/ and forge/build/libs
