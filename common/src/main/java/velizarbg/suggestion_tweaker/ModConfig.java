@@ -16,7 +16,7 @@ public class ModConfig implements ConfigData {
 		return AutoConfig.getConfigHolder(ModConfig.class).getConfig();
 	}
 
-	@Comment("Controls how some suggestions are filtered and sorted based on case")
+	@Comment("Should case be taken into account when suggestions are filtered and sorted?")
 	public boolean isCaseSensitive = false;
 
 	@ConfigEntry.Gui.EnumHandler(option = ConfigEntry.Gui.EnumHandler.EnumDisplayOption.BUTTON)
@@ -27,6 +27,10 @@ public class ModConfig implements ConfigData {
 		LOOSE: It should contain all of the input words that are separated by _ (an underscore), in any order
 		VERY_LOOSE: It should contain all of the input's letters, in any order""")
 	public FilteringMode filteringMode = FilteringMode.LOOSE;
+
+	public boolean shouldHideSuggestionsWithPrefix = false;
+
+	public String hidePrefix = "_";
 
 	public enum FilteringMode {
 		STRICT {

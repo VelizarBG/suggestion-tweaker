@@ -2,6 +2,8 @@
     "text.autoconfig.suggestion-tweaker.title": "Suggestion Tweaker",
     "text.autoconfig.suggestion-tweaker.option.isCaseSensitive": "Enable case sensitivity",
     "text.autoconfig.suggestion-tweaker.option.filteringMode": "Filtering Mode",
+    "text.autoconfig.suggestion-tweaker.option.shouldHideSuggestionsWithPrefix": "Enable hiding suggestions with a specific prefix",
+    "text.autoconfig.suggestion-tweaker.option.hidePrefix": "The specific prefix",
     "suggestion-tweaker.filtering.strict": "Strict",
     "suggestion-tweaker.filtering.slightly_loose": "Slightly Loose",
     "suggestion-tweaker.filtering.loose": "Loose",
