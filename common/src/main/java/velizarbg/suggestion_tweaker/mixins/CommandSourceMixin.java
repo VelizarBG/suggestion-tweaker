@@ -44,6 +44,11 @@ public interface CommandSourceMixin {
 		if (candidateId.length == 2)
 			candidate = candidateId[1];
 
+		if (config.shouldHideSuggestionsWithPrefix)
+			for (String substring : candidate.split("/"))
+				if (substring.startsWith(config.hidePrefix))
+					return false;
+
 		return config.filteringMode.test(remaining, candidate);
 	}
 }
