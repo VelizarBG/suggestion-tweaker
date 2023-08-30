@@ -94,6 +94,13 @@ unifiedPublishing {
 		gameVersions.set(["1.20", "1.20.1"])
 		gameLoaders.set(["forge"])
 
+		relations {
+			depends {
+				curseforge.set "cloth-config"
+				modrinth.set "cloth-config"
+			}
+		}
+
 		System.getenv("changelog")?.with { String changelogg ->
 			changelog.set changelogg
 		}
