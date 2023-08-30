@@ -37,6 +37,7 @@
     "cloth-config": ">=${cloth_version}"
   },
   "suggests": {
-    "modmenu": "*"
+    "modmenu": "*",
+    "better-suggestions": "*"
   }
 }
