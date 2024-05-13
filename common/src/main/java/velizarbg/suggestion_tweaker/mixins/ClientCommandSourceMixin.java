@@ -23,7 +23,7 @@ import static velizarbg.suggestion_tweaker.Constants.config;
 @Mixin(ClientCommandSource.class)
 public class ClientCommandSourceMixin {
 	private String currentInput;
-	private static final char[] SPECIAL_CUTOFF_CHARS = new char[]{'[', '='};
+	private static final char[] SPECIAL_CUTOFF_CHARS = new char[]{'[', '=', ','};
 
 	/**
 	 * In order to fetch all possible suggestions the last argument needs to be empty.
