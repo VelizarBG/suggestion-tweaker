@@ -5,7 +5,9 @@ import net.minecraft.util.Identifier;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Overwrite;
 import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.Redirect;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import java.util.Locale;
 import java.util.function.Consumer;
@@ -15,18 +17,15 @@ import static velizarbg.suggestion_tweaker.Constants.config;
 
 @Mixin(CommandSource.class)
 public interface CommandSourceMixin {
-	/**
-	 * @author VelizarBG
-	 * @reason Too niche to not overwrite
-	 */
-	@Overwrite
-	static <T> void forEachMatching(Iterable<T> candidates, String remaining, Function<T, Identifier> getIdentifier, Consumer<T> action) {
+	@Inject(method = "forEachMatching(Ljava/lang/Iterable;Ljava/lang/String;Ljava/util/function/Function;Ljava/util/function/Consumer;)V", at = @At("HEAD"), cancellable = true)
+	private static <T> void forEachMatching(Iterable<T> candidates, String remaining, Function<T, Identifier> getIdentifier, Consumer<T> action, CallbackInfo ci) {
 		for (T candidate : candidates) {
 			Identifier identifier = getIdentifier.apply(candidate);
 
 			if (CommandSource.shouldSuggest(remaining, identifier.toString()))
 				action.accept(candidate);
 		}
+		ci.cancel();
 	}
 
 	/**
