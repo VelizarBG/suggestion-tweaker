@@ -1,7 +1,9 @@
 {
     "text.autoconfig.suggestion-tweaker.title": "Suggestion Tweaker",
     "text.autoconfig.suggestion-tweaker.option.isCaseSensitive": "Enable case sensitivity",
+    "text.autoconfig.suggestion-tweaker.option.isCaseSensitive.@Tooltip": "Should case be taken into account when suggestions are filtered and sorted?",
     "text.autoconfig.suggestion-tweaker.option.filteringMode": "Filtering Mode",
+    "text.autoconfig.suggestion-tweaker.option.filteringMode.@Tooltip": "What is the requirement for a suggestion to be shown?\nSTRICT: It should start with the input\nSLIGHTLY_LOOSE: It should contain the input anywhere inside of it\nLOOSE: It should contain all of the input words that are separated by _ (an underscore), in any order\nVERY_LOOSE: It should contain all of the input's letters, in any order",
     "text.autoconfig.suggestion-tweaker.option.shouldHideSuggestionsWithPrefix": "Enable hiding suggestions with a specific prefix",
     "text.autoconfig.suggestion-tweaker.option.hidePrefix": "The specific prefix",
     "suggestion-tweaker.filtering.strict": "Strict",

@@ -6,7 +6,6 @@ import me.shedaniel.autoconfig.ConfigData;
 import me.shedaniel.autoconfig.annotation.Config;
 import me.shedaniel.autoconfig.annotation.ConfigEntry;
 import me.shedaniel.autoconfig.serializer.JanksonConfigSerializer;
-import me.shedaniel.cloth.clothconfig.shadowed.blue.endless.jankson.Comment;
 
 @Config(name = "suggestion-tweaker")
 @Config.Gui.Background("minecraft:textures/block/ice.png")
@@ -16,16 +15,11 @@ public class ModConfig implements ConfigData {
 		return AutoConfig.getConfigHolder(ModConfig.class).getConfig();
 	}
 
-	@Comment("Should case be taken into account when suggestions are filtered and sorted?")
+	@ConfigEntry.Gui.Tooltip
 	public boolean isCaseSensitive = false;
 
 	@ConfigEntry.Gui.EnumHandler(option = ConfigEntry.Gui.EnumHandler.EnumDisplayOption.BUTTON)
-	@Comment("""
-		What is the requirement for a suggestion to be shown?
-		STRICT: It should start with the input
-		SLIGHTLY_LOOSE: It should contain the input anywhere inside of it
-		LOOSE: It should contain all of the input words that are separated by _ (an underscore), in any order
-		VERY_LOOSE: It should contain all of the input's letters, in any order""")
+	@ConfigEntry.Gui.Tooltip
 	public FilteringMode filteringMode = FilteringMode.LOOSE;
 
 	public boolean shouldHideSuggestionsWithPrefix = false;

@@ -1,0 +1,13 @@
+{
+    "text.autoconfig.suggestion-tweaker.title": "Suggestion Tweaker",
+    "text.autoconfig.suggestion-tweaker.option.isCaseSensitive": "大小写敏感",
+    "text.autoconfig.suggestion-tweaker.option.isCaseSensitive.@Tooltip": "在对建议进行筛选和排序时，是否应考虑大小写？",
+    "text.autoconfig.suggestion-tweaker.option.filteringMode": "过滤模式",
+    "text.autoconfig.suggestion-tweaker.option.filteringMode.@Tooltip": "显示的建议要满足什么要求？\n严格：应该以输入内容开头\n略微宽松：应该包含输入内容的任何部分\n宽松：应该包含输入内容的任何部分，但可以有多个单词（以下划线分隔），顺序不限\n非常宽松：应该包含任何输入的字母，顺序不限",
+    "text.autoconfig.suggestion-tweaker.option.shouldHideSuggestionsWithPrefix": "隐藏有以下特定前缀的指令建议",
+    "text.autoconfig.suggestion-tweaker.option.hidePrefix": "特定前缀",
+    "suggestion-tweaker.filtering.strict": "严格",
+    "suggestion-tweaker.filtering.slightly_loose": "略微宽松",
+    "suggestion-tweaker.filtering.loose": "宽松",
+    "suggestion-tweaker.filtering.very_loose": "非常宽松"
+}
